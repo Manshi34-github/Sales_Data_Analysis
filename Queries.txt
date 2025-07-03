@@ -1,0 +1,43 @@
+
+Business Questions and Answers - Sales Insights Data Analysis Project
+
+1. What is the total number of customers in the database?
+   Answer: SELECT COUNT(*) FROM customers;
+
+2. How are sales distributed across different regions or markets?
+   Answer: SELECT market_code, SUM(sales_amount) FROM transactions GROUP BY market_code;
+
+3. Which products generate the most revenue?
+   Answer: SELECT product_code, SUM(sales_amount) AS total_sales FROM transactions GROUP BY product_code ORDER BY total_sales DESC;
+
+4. What are the monthly and yearly sales trends?
+   Answer: SELECT year, month_name, SUM(sales_amount) FROM transactions JOIN date ON transactions.order_date = date.date GROUP BY year, month_name ORDER BY year, month_name;
+
+5. What is the total revenue generated in 2020?
+   Answer: SELECT SUM(sales_amount) FROM transactions JOIN date ON transactions.order_date = date.date WHERE year = 2020 AND TRIM(currency) IN ('INR', 'USD');
+
+6. How does revenue vary by market (e.g., Chennai vs others)?
+   Answer: SELECT market_code, SUM(sales_amount) FROM transactions JOIN date ON transactions.order_date = date.date WHERE year = 2020 GROUP BY market_code;
+
+7. How many transactions occurred in USD, and what is their impact on total revenue?
+   Answer: SELECT COUNT(*), SUM(sales_amount) FROM transactions WHERE TRIM(currency) = 'USD';
+
+8. Which months had the highest and lowest sales?
+   Answer: SELECT month_name, SUM(sales_amount) AS total_sales FROM transactions JOIN date ON transactions.order_date = date.date GROUP BY month_name ORDER BY total_sales DESC;
+
+9. What are the top-performing customers based on revenue?
+   Answer: SELECT customer_code, SUM(sales_amount) AS total_spent FROM transactions GROUP BY customer_code ORDER BY total_spent DESC LIMIT 10;
+
+10. How does normalizing currency (USD to INR) impact overall revenue analysis?
+    Answer: Create a new column using Power BI to convert USD to INR for comparison: 
+    = if [currency] = "USD" then [sales_amount]*75 else [sales_amount]
+
+11. What percentage of revenue comes from repeat customers (if customer data allows)?
+    Answer: Analyze customer_code frequency and revenue split. Requires additional logic based on repeated customer entries.
+
+12. Are there seasonal patterns in sales?
+    Answer: Analyze sales trends by month using: 
+    SELECT month_name, SUM(sales_amount) FROM transactions JOIN date ON transactions.order_date = date.date GROUP BY month_name ORDER BY month_name;
+
+13. What is the revenue contribution of each product category or product code?
+    Answer: SELECT product_code, SUM(sales_amount) FROM transactions GROUP BY product_code ORDER BY SUM(sales_amount) DESC;
