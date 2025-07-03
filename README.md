@@ -1,5 +1,5 @@
 # Sales Insights Data Analysis Project
-A Power BI and SQL-based sales data analysis project simulating real-time business insights for a computer hardware company facing dynamic market challenges.
+A **Power BI** and **SQL**-based sales data analysis project simulating real-time business insights for a computer hardware company facing dynamic market challenges.
 
 ## **Overview**
 
